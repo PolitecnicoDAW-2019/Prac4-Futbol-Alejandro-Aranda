@@ -1,0 +1,3 @@
+class FutbolService {
+  constructor() {}
+}

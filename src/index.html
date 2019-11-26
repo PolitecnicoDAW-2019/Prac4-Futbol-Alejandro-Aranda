@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    #card-players {
+      overflow-y: scroll;
+      width: 110%;
+      padding-bottom: 10%;
+      position: absolute;
+      left: 10%;
+      border: black, 1px, solid;
+    }
+    #formPlayer>*{
+      display: block;
+      margin-bottom: 5%;
+    }
+    #formPlayer{
+      display: block;
+      position: fixed;
+      padding: 30px;
+      width: 20%;
+      left: 60%;
+      border: 5px solid red;
+    }
+    .playerCard {
+      display: table;
+      border: 5px solid red;
+      border-radius: 6px;
+      margin-bottom: 5%;
+    }
+
+    .playerCard > * {
+      display: table-cell;
+      vertical-align: top;
+    }
+    input[type=text],select{
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+  </style>
+  <body>
+    <h1>WORK</h1>
+    <div id="card-players" style="height: 400px; overflow-y: scroll;"></div>
+    <div id="formPlayer">
+      <label>Nombre:</label>
+      <input type="text" id="name">
+      <label>Alias:</label>
+      <input type="text" id='alias'>
+      <label>Edad:</label>
+      <input type="text" id="birthdate"></input>
+      <label>Club:</label>
+      <input type="text" id="club"></input>
+    </div>
+  </body>
+  <script src="./services/Http.service.js"></script>
+  <script src="./views/Futbol.view.js"></script>
+  <script src="./controllers/Futbol.controller.js"></script>
+  <script src="./app.js"></script>
+</html>
