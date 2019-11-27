@@ -1,1 +1,1 @@
-const app = new FutbolController(new FutbolView(), new HttpService());
+const app = new FutbolController(new FutbolView(), new PlayerService());
