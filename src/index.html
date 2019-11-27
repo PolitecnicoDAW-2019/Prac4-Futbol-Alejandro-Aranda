@@ -15,16 +15,22 @@
       left: 10%;
       border: black, 1px, solid;
     }
+    #panelForm>*{
+      display: block;
+      margin-bottom: 5%;
+    }
     #formPlayer>*{
       display: block;
       margin-bottom: 5%;
     }
-    #formPlayer{
+  
+    #panelForm{
       display: block;
-      position: fixed;
+      position: absolute;
       padding: 30px;
       width: 20%;
       left: 60%;
+      margin-top: -3%;
       border: 5px solid red;
     }
     .playerCard {
@@ -47,10 +53,37 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
+
+.buttonsPlayer {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #c2bec2;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.buttonsPlayer:hover {
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
+}
+.buttonsPlayer:active {
+	position:relative;
+	top:1px;
+}
+
   </style>
   <body>
     <h1>WORK</h1>
-    <div id="card-players" style="height: 400px; overflow-y: scroll;"></div>
+    <div id="card-players" style="width: 500px; height: 400px; overflow-y: scroll;"></div>
+    <div id="panelForm">
     <div id="formPlayer">
       <label>Nombre:</label>
       <input type="text" id="name">
@@ -60,9 +93,20 @@
       <input type="text" id="birthdate"></input>
       <label>Club:</label>
       <input type="text" id="club"></input>
+      <label>Imagen: </label>
+      <img src="" id="picture" style="width: 200px;">
+      <input type="file" accept="accept='image/*'" id="image">
     </div>
+      <div>
+        <button class="buttonsPlayer" id="upload">Guardar</button>
+        <button class="buttonsPlayer" id="delete">Borrar</button>
+        <button class="buttonsPlayer" id="insert">Añadir</button>
+      </div>
+</div>
   </body>
+  <script src="./models/Player.model.js"></script>
   <script src="./services/Http.service.js"></script>
+  <script src="./services/Player.service.js"></script>
   <script src="./views/Futbol.view.js"></script>
   <script src="./controllers/Futbol.controller.js"></script>
   <script src="./app.js"></script>
