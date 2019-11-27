@@ -1,17 +1,21 @@
 class FutbolController {
-  constructor(view, service) {
-    this.service = service;
+  constructor(view, playerService) {
+    this.playerService = playerService;
     this.view = view;
     this.view.bindPlayersBD(this.handlerPlayersInBD);
     this.view.loadPositions(this.getPositions);
+    this.view.bindAddPlayer(this.handlerAddPlayer);
+    this.view.bindInputReadUploadedFile();
   }
-  handlerPlayersInBD = (url, method) => {
-    const players = this.service.makeRequest(url, method);
-    //this.service.loadPlayers(players);
-    return players;
+  handlerPlayersInBD = (url, body) => {
+    return this.playerService.loadPlayers(url, body);
   };
 
-  getPositions = (url, method) => {
-    return this.service.makeRequest(url, method);
+  handlerAddPlayer = player => {
+    return this.playerService.addPlayer(player);
+  };
+
+  getPositions = (url, body) => {
+    return this.playerService.makeRequest(url, body);
   };
 }

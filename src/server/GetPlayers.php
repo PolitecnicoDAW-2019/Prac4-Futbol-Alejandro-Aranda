@@ -6,9 +6,8 @@ require_once './oConexion.class.php';
 $oConexion = new oConexion('mysql', 'docker', 'root', 'tiger');
 $oConexion->abrir();
 $oConni = $oConexion->obtenerConexion();
-$stmtSelect= $oConni->query("SELECT PLAYERS.ID, NAME, ALIAS, CLUB, BIRTHDATE, PICTURE, DESCRIPTION  FROM PLAYERS INNER JOIN POSITIONS ON PLAYERS.ID_POSITION = POSITIONS.ID");
+$stmtSelect= $oConni->query("SELECT PLAYERS.ID,POSITIONS.ID as IDPOSITION, NAME, ALIAS, CLUB, BIRTHDATE, PICTURE, DESCRIPTION  FROM PLAYERS INNER JOIN POSITIONS ON PLAYERS.ID_POSITION = POSITIONS.ID");
 while ($players=$stmtSelect->fetch_object()){
-    $fileExt=pathinfo($players->PICTURE,PATHINFO_EXTENSION);
-    $playerss[]=['id'=>$players->ID,'name'=>$players->NAME,'alias'=>$players->ALIAS,'club'=>$players->CLUB,'birthdate'=>$players->BIRTHDATE,'picture'=>'data:image/'.';base64,'.base64_encode($players->PICTURE),'position'=>$players->DESCRIPTION];
+    $playerss[]=['id'=>$players->ID,'name'=>$players->NAME,'alias'=>$players->ALIAS,'club'=>$players->CLUB,'birthdate'=>$players->BIRTHDATE,'picture'=>base64_encode($players->PICTURE),'selectPosition'=>$players->DESCRIPTION,'idPosition'=>$players->IDPOSITION];
 }
 echo json_encode($playerss);
