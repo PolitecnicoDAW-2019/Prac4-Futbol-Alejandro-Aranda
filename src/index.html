@@ -15,13 +15,20 @@
       left: 10%;
       border: black, 1px, solid;
     }
-    #panelForm>*{
+    #panelForm>*,#formPlayer>*{
       display: block;
       margin-bottom: 5%;
     }
-    #formPlayer>*{
-      display: block;
-      margin-bottom: 5%;
+
+    #search{
+      display: inline-block;
+      margin-left: 150px;
+      padding: 30px;
+      width: 20%;
+      margin-top: -3%;
+    }
+    #search>*{
+     
     }
   
     #panelForm{
@@ -60,7 +67,6 @@
 	background-color:#ffffff;
 	border-radius:6px;
 	border:1px solid #c2bec2;
-	display:inline-block;
 	cursor:pointer;
 	color:#666666;
 	font-family:Arial;
@@ -82,6 +88,7 @@
   </style>
   <body>
     <h1>WORK</h1>
+    <div id="search"><input type="text" id="inputSearch"><button class="buttonsPlayer" id="buttonSearch">Buscar</button></div>
     <div id="card-players" style="width: 500px; height: 400px; overflow-y: scroll;"></div>
     <div id="panelForm">
     <div id="formPlayer">
@@ -98,16 +105,15 @@
       <input type="file" accept="accept='image/*'" id="image">
     </div>
       <div>
-        <button class="buttonsPlayer" id="upload">Guardar</button>
-        <button class="buttonsPlayer" id="delete">Borrar</button>
         <button class="buttonsPlayer" id="insert">Añadir</button>
+        <div id="buttonsUpdateDelete">
+        </div>
       </div>
 </div>
   </body>
-  <script src="./models/Player.model.js"></script>
-  <script src="./services/Http.service.js"></script>
-  <script src="./services/Player.service.js"></script>
-  <script src="./views/Futbol.view.js"></script>
-  <script src="./controllers/Futbol.controller.js"></script>
+  <script src="./models/player.model.js"></script>
+  <script src="./services/player.service.js"></script>
+  <script src="./views/futbol.view.js"></script>
+  <script src="./controllers/futbol.controller.js"></script>
   <script src="./app.js"></script>
 </html>
