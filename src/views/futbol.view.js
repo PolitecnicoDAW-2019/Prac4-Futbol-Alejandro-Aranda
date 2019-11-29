@@ -142,7 +142,7 @@ class FutbolView {
     this.uploadPlayer = oldPlayer => {
       const updatedPlayer = this.getPlayerFromForm();
       updatedPlayer.id = oldPlayer.id;
-      handler(oldPlayer, updatedPlayer).then(cardsPlayers => {
+      handler(oldPlayer, updatedPlayer, this.picture).then(cardsPlayers => {
         this.DOM.cards.innerHTML = '';
         this.loadCardPlayers(cardsPlayers);
         this.DOM.listButtons.innerHTML = '';
