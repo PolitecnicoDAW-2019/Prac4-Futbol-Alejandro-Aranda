@@ -22,8 +22,8 @@ class FutbolController {
     return this.playerService.addPlayer(player, picture);
   };
 
-  handlerUpdatePlayer = (oldPlayer, updatedPlayer) => {
-    return this.playerService.uploadPlayer(oldPlayer, updatedPlayer);
+  handlerUpdatePlayer = (oldPlayer, updatedPlayer, picture) => {
+    return this.playerService.uploadPlayer(oldPlayer, updatedPlayer, picture);
   };
 
   handlerDeletePlayer = player => {
