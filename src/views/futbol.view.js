@@ -1,5 +1,7 @@
 class FutbolView {
-  constructor() {}
+  constructor() {
+    this.checks = { nameCheck: false, clubCheck: false, aliasCheck: false };
+  }
   DOM = {
     cards: document.getElementById('card-players'),
     nameInput: document.getElementById('name'),
@@ -156,11 +158,54 @@ class FutbolView {
       });
     };
   };
+  bindInput({ check, input, handler }) {
+    const checkPosition = document.getElementById(check);
+    input.addEventListener('keyup', () => {
+      let isValid = false;
+      isValid = handler(input.value);
+      this.showTick(checkPosition, isValid);
+      this.checks[check] = isValid;
+      this.validateSendButton();
+    });
+  }
+  showTick(element, isSuccess) {
+    element.innerHTML = '';
+    const elementSrc = isSuccess ? '../assets/images/green-tick.png' : '../assets/images/x-red.png';
+    element.innerHTML = `<img class='image-check' src='${elementSrc}'>`;
+  }
+  validateSendButton() {
+    this.DOM.addButton.disabled = Object.values(this.checks).includes(false);
+  }
+
   bindSearchPlayers = handler => {
     this.DOM.buttonSearch.addEventListener('click', () => {
       this.DOM.cards.innerHTML = '';
       const cardsPlayers = handler(this.DOM.inputSearch.value);
       this.loadCardPlayers(cardsPlayers);
+    });
+  };
+
+  bindValidateName = handler => {
+    this.bindInput({
+      check: 'nameCheck',
+      input: this.DOM.nameInput,
+      handler
+    });
+  };
+
+  bindValidateAlias = handler => {
+    this.bindInput({
+      check: 'aliasCheck',
+      input: this.DOM.aliasInput,
+      handler
+    });
+  };
+
+  bindValidateClub = handler => {
+    this.bindInput({
+      check: 'clubCheck',
+      input: this.DOM.clubInput,
+      handler
     });
   };
 }
