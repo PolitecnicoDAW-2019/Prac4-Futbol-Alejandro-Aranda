@@ -18,8 +18,8 @@ class FutbolView {
     inputSearch: document.getElementById('inputSearch'),
     buttonSearch: document.getElementById('buttonSearch')
   };
-  bindPlayersBD = handler => {
-    handler('http://localhost/server/GetPlayers.php').then(cardsPlayers => {
+  bindPlayersDB = handler => {
+    handler().then(cardsPlayers => {
       this.loadCardPlayers(cardsPlayers);
     });
   };
@@ -56,7 +56,7 @@ class FutbolView {
     this.DOM.cards.appendChild(cards);
   };
   loadPositions = handler => {
-    handler('http://localhost/server/loadPositions.php').then(positions => {
+    handler().then(positions => {
       this.positions = positions;
       const select = Object.keys(positions).reduce((optionsPositions, position) => {
         const option = document.createElement('option');
@@ -83,13 +83,13 @@ class FutbolView {
     const uploadButton = document.createElement('button');
     uploadButton.textContent = 'Guardar';
     uploadButton.className = 'buttonsPlayer';
-    uploadButton.onclick = () => this.uploadPlayer(player);
+    uploadButton.onclick = () => this.uploadPlayerDB(player);
     this.DOM.listButtons.appendChild(uploadButton);
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Borrar';
     deleteButton.className = 'buttonsPlayer';
-    deleteButton.onclick = () => this.deletePlayer(player);
+    deleteButton.onclick = () => this.deletePlayerDB(player);
     this.DOM.listButtons.appendChild(deleteButton);
   };
   showPlayerInForm = ({ id, name, alias, club, birthdate, namePicture, selectPosition, idPosition }) => {
@@ -119,7 +119,7 @@ class FutbolView {
   bindValidateClub = handler => {};
   bindValidateAlias = handler => {};
 
-  bindAddPlayer = handler => {
+  bindAddPlayerDB = handler => {
     this.DOM.addButton.addEventListener('click', () => {
       const name = this.DOM.nameInput.value;
       const alias = this.DOM.aliasInput.value;
@@ -138,8 +138,8 @@ class FutbolView {
     });
   };
 
-  bindUploadPlayer = handler => {
-    this.uploadPlayer = oldPlayer => {
+  bindUploadPlayerDB = handler => {
+    this.uploadPlayerDB = oldPlayer => {
       const updatedPlayer = this.getPlayerFromForm();
       updatedPlayer.id = oldPlayer.id;
       handler(oldPlayer, updatedPlayer, this.picture).then(cardsPlayers => {
@@ -149,8 +149,8 @@ class FutbolView {
       });
     };
   };
-  bindDeletePlayer = handler => {
-    this.deletePlayer = player => {
+  bindDeletePlayerDB = handler => {
+    this.deletePlayerDB = player => {
       handler(player).then(cardsPlayers => {
         this.DOM.cards.innerHTML = '';
         this.loadCardPlayers(cardsPlayers);
@@ -158,6 +158,13 @@ class FutbolView {
       });
     };
   };
+
+  bindAddPlayerArray = handler => {
+    this.addPlayerArray = player => {
+      this.loadCardPlayers(handler(player));
+    };
+  };
+
   bindInput({ check, input, handler }) {
     const checkPosition = document.getElementById(check);
     input.addEventListener('keyup', () => {

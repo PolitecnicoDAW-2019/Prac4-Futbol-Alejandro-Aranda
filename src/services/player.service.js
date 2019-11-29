@@ -2,8 +2,8 @@ class PlayerService {
   constructor() {}
   players = [];
 
-  loadPlayers = (url, body) => {
-    return this.makeRequest(url, body).then(players => {
+  loadPlayers = () => {
+    return this.makeRequest(PLAYERS_URL).then(players => {
       if (!players) {
         return [];
       }
@@ -12,10 +12,28 @@ class PlayerService {
     });
   };
 
-  //do getPlayerFromService and put in view
-  addPlayer = (player, picture) => {
+  loadPositions = () => {
+    return this.makeRequest(POSITIONS_URL);
+  };
+
+  addPlayerArray = player => {
     this.players = [...this.players, player];
-    return this.makeRequest('http://localhost/server/insertarJugador.php', player, picture)
+    return this.players;
+  };
+  updatePlayerArray = (oldPlayer, updatedPlayer) => {
+    this.oldPlayer = oldPlayer;
+    const playerFound = this.players.findIndex(player => player.id == updatedPlayer.id);
+    this.players[playerFound] = updatedPlayer;
+    return this.players;
+  };
+  deletePlayerArray = player => {
+    this.lastBackupPlayers = this.players;
+    return this.players.filter(_player => _player.id !== player.id);
+  };
+
+  //do getPlayerFromService and put in view
+  addPlayerDB = (player, picture) => {
+    return this.makeRequest(ADD_PLAYER_URL, player, picture)
       .then(resolve => {
         const newPlayer = this.players.find(player => player.id == '');
         newPlayer.id = resolve.lastId;
@@ -24,10 +42,10 @@ class PlayerService {
       .catch(reject => this.players.pop());
   };
 
-  uploadPlayer = (oldPlayer, updatedPlayer, picture) => {
+  updatePlayerDB = (oldPlayer, updatedPlayer, picture) => {
     const playerFound = this.players.findIndex(player => player.id == updatedPlayer.id);
     this.players[playerFound] = updatedPlayer;
-    return this.makeRequest('http://localhost/server/updatedPlayer.php', updatedPlayer, picture)
+    return this.makeRequest(UPDATE_PLAYER_URL, updatedPlayer, picture)
       .then(resolve => {
         return this.players;
       })
@@ -38,10 +56,9 @@ class PlayerService {
       });
   };
 
-  deletePlayer = player => {
-    const playersTemp = this.players;
+  deletePlayeDBr = player => {
     this.players = this.players.filter(_player => _player.id !== player.id);
-    return this.makeRequest('http://localhost/server/deleteJugador.php', player.id)
+    return this.makeRequest(DELETE_PLAYER_URL, player.id)
       .then(resolve => {
         return this.players;
       })
