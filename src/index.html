@@ -76,13 +76,8 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffffff;
 }
-.buttonsPlayer:hover {
-	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-	background-color:#f6f6f6;
-}
-.buttonsPlayer:active {
-	position:relative;
-	top:1px;
+.image-check{
+  width: 10%;
 }
 
   </style>
@@ -94,18 +89,21 @@
     <div id="formPlayer">
       <label>Nombre:</label>
       <input type="text" id="name">
+      <span class="formField" id="nameCheck"></span>
       <label>Alias:</label>
       <input type="text" id='alias'>
+      <span class="formField" id="aliasCheck"></span>
       <label>Edad:</label>
       <input type="text" id="birthdate"></input>
       <label>Club:</label>
       <input type="text" id="club"></input>
+      <span class="formField" id="clubCheck"></span>
       <label>Imagen: </label>
       <img src="" id="picture" style="width: 200px;">
       <input type="file" accept="accept='image/*'" id="image">
     </div>
       <div>
-        <button class="buttonsPlayer" id="insert">Añadir</button>
+        <button class="buttonsPlayer" id="insert" disabled>Añadir</button>
         <div id="buttonsUpdateDelete">
         </div>
       </div>
