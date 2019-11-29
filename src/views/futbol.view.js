@@ -33,7 +33,7 @@ class FutbolView {
       const playerClub = document.createElement('p');
       playerClub.textContent = 'Club: ' + club;
       const playerBirthDate = document.createElement('p');
-      playerBirthDate.textContent = 'Edad: ' + birthdate;
+      playerBirthDate.textContent = 'Edad: ' + moment().diff(birthdate, 'years');
       const playerPosition = document.createElement('p');
       playerPosition.textContent = 'Posicion: ' + selectPosition;
       const playerPicture = document.createElement('img');
@@ -101,6 +101,22 @@ class FutbolView {
     this.constructUpdateAndDeleteButton({ id, name, alias, club, birthdate, namePicture, selectPosition, idPosition });
   };
 
+  getPlayerFromForm = () => {
+    const name = this.DOM.nameInput.value;
+    const alias = this.DOM.aliasInput.value;
+    const club = this.DOM.clubInput.value;
+    const birthdate = this.DOM.birthdateInput.value;
+    const selectPosition = this.DOM.selectPosition.value;
+    const picture = this.DOM.imgPicture.src.split(',').pop();
+    const namePicture = this.DOM.pictureImg.files[0]['name'];
+    const idPosition = this.positions[selectPosition];
+    return new Player({ name, alias, club, birthdate, selectPosition, picture, namePicture, idPosition });
+  };
+
+  bindValidateName = handler => {};
+  bindValidateClub = handler => {};
+  bindValidateAlias = handler => {};
+
   bindAddPlayer = handler => {
     this.DOM.addButton.addEventListener('click', () => {
       const name = this.DOM.nameInput.value;
@@ -120,17 +136,6 @@ class FutbolView {
     });
   };
 
-  getPlayerFromForm = () => {
-    const name = this.DOM.nameInput.value;
-    const alias = this.DOM.aliasInput.value;
-    const club = this.DOM.clubInput.value;
-    const birthdate = this.DOM.birthdateInput.value;
-    const selectPosition = this.DOM.selectPosition.value;
-    const picture = this.DOM.imgPicture.src.split(',').pop();
-    const namePicture = this.DOM.pictureImg.files[0]['name'];
-    const idPosition = this.positions[selectPosition];
-    return new Player({ name, alias, club, birthdate, selectPosition, picture, namePicture, idPosition });
-  };
   bindUploadPlayer = handler => {
     this.uploadPlayer = oldPlayer => {
       const updatedPlayer = this.getPlayerFromForm();
@@ -152,8 +157,10 @@ class FutbolView {
     };
   };
   bindSearchPlayers = handler => {
-    this.DOM.cards.innerHTML = '';
-    const cardsPlayers = handler(this.DOM.inputSearch.textContent);
-    this.loadCardPlayers(cardsPlayers);
+    this.DOM.buttonSearch.addEventListener('click', () => {
+      this.DOM.cards.innerHTML = '';
+      const cardsPlayers = handler(this.DOM.inputSearch.value);
+      this.loadCardPlayers(cardsPlayers);
+    });
   };
 }
