@@ -4,83 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Players</title>
+    <link rel="stylesheet" href="./assets/style.css">
   </head>
-  <style>
-    #card-players {
-      overflow-y: scroll;
-      width: 110%;
-      padding-bottom: 10%;
-      position: absolute;
-      left: 10%;
-      border: black, 1px, solid;
-    }
-    #panelForm>*,#formPlayer>*{
-      display: block;
-      margin-bottom: 5%;
-    }
-
-    #search{
-      display: inline-block;
-      margin-left: 150px;
-      padding: 30px;
-      width: 20%;
-      margin-top: -3%;
-    }
-    #search>*{
-     
-    }
-  
-    #panelForm{
-      display: block;
-      position: absolute;
-      padding: 30px;
-      width: 20%;
-      left: 60%;
-      margin-top: -3%;
-      border: 5px solid red;
-    }
-    .playerCard {
-      display: table;
-      border: 5px solid red;
-      border-radius: 6px;
-      margin-bottom: 5%;
-    }
-
-    .playerCard > * {
-      display: table-cell;
-      vertical-align: top;
-    }
-    input[type=text],select{
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-.buttonsPlayer {
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-	background-color:#ffffff;
-	border-radius:6px;
-	border:1px solid #c2bec2;
-	cursor:pointer;
-	color:#666666;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:11px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
-}
-.image-check{
-  width: 10%;
-}
-
-  </style>
   <body>
     <h1>WORK</h1>
     <div id="search"><input type="text" id="inputSearch"><button class="buttonsPlayer" id="buttonSearch">Buscar</button></div>
@@ -94,7 +20,7 @@
       <input type="text" id='alias'>
       <span class="formField" id="aliasCheck"></span>
       <label>Edad:</label>
-      <input type="text" id="birthdate"></input>
+      <input type="date" id="birthdate"></input>
       <label>Club:</label>
       <input type="text" id="club"></input>
       <span class="formField" id="clubCheck"></span>
