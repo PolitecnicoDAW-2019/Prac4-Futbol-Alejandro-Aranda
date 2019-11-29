@@ -12,6 +12,7 @@ class PlayerService {
     });
   };
 
+  //do getPlayerFromService and put in view
   addPlayer = (player, picture) => {
     this.players = [...this.players, player];
     return this.makeRequest('http://localhost/server/insertarJugador.php', player, picture)
@@ -23,10 +24,10 @@ class PlayerService {
       .catch(reject => this.players.pop());
   };
 
-  uploadPlayer = (oldPlayer, updatedPlayer) => {
+  uploadPlayer = (oldPlayer, updatedPlayer, picture) => {
     const playerFound = this.players.findIndex(player => player.id == updatedPlayer.id);
     this.players[playerFound] = updatedPlayer;
-    return this.makeRequest('http://localhost/server/updatedPlayer.php', updatedPlayer)
+    return this.makeRequest('http://localhost/server/updatedPlayer.php', updatedPlayer, picture)
       .then(resolve => {
         return this.players;
       })
