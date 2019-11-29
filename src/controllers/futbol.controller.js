@@ -1,14 +1,18 @@
 class FutbolController {
-  constructor(view, playerService) {
+  constructor(view, playerService, validatorService) {
     this.playerService = playerService;
     this.view = view;
+    this.validatorService = validatorService;
     this.view.bindPlayersBD(this.handlerPlayersInBD);
     this.view.loadPositions(this.getPositions);
     this.view.bindAddPlayer(this.handlerAddPlayer);
     this.view.bindInputReadUploadedFile();
     this.view.bindUploadPlayer(this.handlerUpdatePlayer);
     this.view.bindDeletePlayer(this.handlerDeletePlayer);
-    //  this.view.bindSearchPlayers(this.handlerSearchPlayers);
+    this.view.bindSearchPlayers(this.handlerSearchPlayers);
+    this.view.bindValidateName(this.handlerValidateName);
+    this.view.bindValidateAlias(this.handlerValidateAlias);
+    this.view.bindValidateClub(this.handlerValidateClub);
   }
   handlerPlayersInBD = (url, body) => {
     return this.playerService.loadPlayers(url, body);
@@ -27,7 +31,19 @@ class FutbolController {
   };
 
   handlerSearchPlayers = alias => {
-    return this.playerService.searchPlayer(alias);
+    return this.playerService.searchPlayers(alias);
+  };
+
+  handlerValidateName = name => {
+    return this.validatorService.validateName(name);
+  };
+
+  handlerValidateAlias = alias => {
+    return this.validatorService.validateAlias(alias);
+  };
+
+  handlerValidateClub = club => {
+    return this.validatorService.validateClub(club);
   };
 
   getPositions = (url, body) => {
