@@ -20,10 +20,10 @@ class PlayerService {
     this.players = [...this.players, player];
     return this.players;
   };
-  updatePlayerArray = (oldPlayer, updatedPlayer) => {
-    this.oldPlayer = oldPlayer;
+  updatePlayerArray = updatedPlayer => {
     const playerFound = this.players.findIndex(player => player.id == updatedPlayer.id);
     this.players[playerFound] = updatedPlayer;
+    console.log(this.players);
     return this.players;
   };
   deletePlayerArray = player => {
@@ -31,7 +31,6 @@ class PlayerService {
     return this.players.filter(_player => _player.id !== player.id);
   };
 
-  //do getPlayerFromService and put in view
   addPlayerDB = (player, picture) => {
     return this.makeRequest(ADD_PLAYER_URL, player, picture)
       .then(resolve => {
@@ -56,7 +55,7 @@ class PlayerService {
       });
   };
 
-  deletePlayeDBr = player => {
+  deletePlayerDB = player => {
     this.players = this.players.filter(_player => _player.id !== player.id);
     return this.makeRequest(DELETE_PLAYER_URL, player.id)
       .then(resolve => {

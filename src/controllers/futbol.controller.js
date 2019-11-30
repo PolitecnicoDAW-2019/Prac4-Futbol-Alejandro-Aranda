@@ -3,31 +3,45 @@ class FutbolController {
     this.playerService = playerService;
     this.view = view;
     this.validatorService = validatorService;
-    this.view.bindPlayersBD(this.handlerPlayersInBD);
-    this.view.loadPositions(this.getPositions);
-    this.view.bindAddPlayer(this.handlerAddPlayer);
+    this.view.bindPlayersDB(this.handlerPlayersInBD);
+    this.view.loadPositions(this.handlerGetPositions);
+    this.view.bindAddPlayerDB(this.handlerAddPlayerDB);
     this.view.bindInputReadUploadedFile();
-    this.view.bindUploadPlayer(this.handlerUpdatePlayer);
-    this.view.bindDeletePlayer(this.handlerDeletePlayer);
+    this.view.bindUploadPlayerDB(this.handlerUpdatePlayerDB);
+    this.view.bindDeletePlayerDB(this.handlerDeletePlayerDB);
     this.view.bindSearchPlayers(this.handlerSearchPlayers);
     this.view.bindValidateName(this.handlerValidateName);
     this.view.bindValidateAlias(this.handlerValidateAlias);
     this.view.bindValidateClub(this.handlerValidateClub);
+    this.view.getPlayersFromService = this.playerService.getPlayersFromService;
+    this.view.bindAddPlayerArray(this.handlerAddPlayerArray);
+    this.view.bindUpdatePlayerArray(this.handlerUpdatePlayerArray);
+    this.view.bindDeletePlayerArray(this.handlerDeletePlayerArray);
   }
-  handlerPlayersInBD = (url, body) => {
-    return this.playerService.loadPlayers(url, body);
+  handlerPlayersInBD = () => {
+    return this.playerService.loadPlayers();
   };
 
-  handlerAddPlayer = (player, picture) => {
-    return this.playerService.addPlayer(player, picture);
+  handlerAddPlayerDB = (player, picture) => {
+    return this.playerService.addPlayerDB(player, picture);
   };
 
-  handlerUpdatePlayer = (oldPlayer, updatedPlayer, picture) => {
-    return this.playerService.uploadPlayer(oldPlayer, updatedPlayer, picture);
+  handlerUpdatePlayerDB = (oldPlayer, updatedPlayer, picture) => {
+    return this.playerService.updatePlayerDB(oldPlayer, updatedPlayer, picture);
   };
 
-  handlerDeletePlayer = player => {
-    return this.playerService.deletePlayer(player);
+  handlerDeletePlayerDB = player => {
+    return this.playerService.deletePlayerDB(player);
+  };
+
+  handlerAddPlayerArray = player => {
+    return this.playerService.addPlayerArray(player);
+  };
+  handlerUpdatePlayerArray = (oldPlayer, updatedPlayer) => {
+    return this.playerService.updatePlayerArray(oldPlayer, updatedPlayer);
+  };
+  handlerDeletePlayerArray = player => {
+    return this.playerService.deletePlayerArray(player);
   };
 
   handlerSearchPlayers = alias => {
@@ -46,7 +60,7 @@ class FutbolController {
     return this.validatorService.validateClub(club);
   };
 
-  getPositions = (url, body) => {
-    return this.playerService.makeRequest(url, body);
+  handlerGetPositions = () => {
+    return this.playerService.loadPositions();
   };
 }
