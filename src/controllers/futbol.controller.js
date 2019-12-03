@@ -13,7 +13,6 @@ class FutbolController {
     this.view.bindValidateName(this.handlerValidateName);
     this.view.bindValidateAlias(this.handlerValidateAlias);
     this.view.bindValidateClub(this.handlerValidateClub);
-    this.view.getPlayersFromService = this.playerService.getPlayersFromService;
     this.view.bindAddPlayerArray(this.handlerAddPlayerArray);
     this.view.bindUpdatePlayerArray(this.handlerUpdatePlayerArray);
     this.view.bindDeletePlayerArray(this.handlerDeletePlayerArray);
@@ -37,8 +36,8 @@ class FutbolController {
   handlerAddPlayerArray = player => {
     return this.playerService.addPlayerArray(player);
   };
-  handlerUpdatePlayerArray = (oldPlayer, updatedPlayer) => {
-    return this.playerService.updatePlayerArray(oldPlayer, updatedPlayer);
+  handlerUpdatePlayerArray = updatedPlayer => {
+    return this.playerService.updatePlayerArray(updatedPlayer);
   };
   handlerDeletePlayerArray = player => {
     return this.playerService.deletePlayerArray(player);

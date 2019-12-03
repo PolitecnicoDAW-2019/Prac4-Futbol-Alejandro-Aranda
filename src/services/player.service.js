@@ -23,7 +23,6 @@ class PlayerService {
   updatePlayerArray = updatedPlayer => {
     const playerFound = this.players.findIndex(player => player.id == updatedPlayer.id);
     this.players[playerFound] = updatedPlayer;
-    console.log(this.players);
     return this.players;
   };
   deletePlayerArray = player => {

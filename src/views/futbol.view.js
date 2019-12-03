@@ -109,7 +109,7 @@ class FutbolView {
     const club = this.DOM.clubInput.value;
     const birthdate = this.DOM.birthdateInput.value;
     const selectPosition = this.DOM.selectPosition.value;
-    const namePicture = this.DOM.imgPicture.src.includes('data:image/') ? this.DOM.pictureImg.files[0]['name'] : this.DOM.imgPicture.src;
+    const namePicture = this.DOM.pictureImg.files[0].name;
     const idPosition = this.positions[selectPosition];
     return new Player({ name, alias, club, birthdate, selectPosition, namePicture, idPosition });
   };
@@ -128,7 +128,6 @@ class FutbolView {
       const player = new Player({ id, name, alias, club, birthdate, selectPosition, namePicture, idPosition });
       this.addPlayerArray(player);
       handler(player, picture).then(cardsPlayers => {
-        console.log('hola2');
         this.DOM.cards.innerHTML = '';
         this.loadCardPlayers(cardsPlayers);
       });
@@ -139,7 +138,7 @@ class FutbolView {
     this.uploadPlayerDB = oldPlayer => {
       const updatedPlayer = this.getPlayerFromForm();
       updatedPlayer.id = oldPlayer.id;
-      this.updatePlayerArray(oldPlayer, updatedPlayer);
+      this.updatePlayerArray(updatedPlayer);
       handler(oldPlayer, updatedPlayer, this.picture).then(cardsPlayers => {
         this.DOM.cards.innerHTML = '';
         this.loadCardPlayers(cardsPlayers);
@@ -166,9 +165,9 @@ class FutbolView {
   };
 
   bindUpdatePlayerArray = handler => {
-    this.updatePlayerArray = (oldPlayer, updatePlayer) => {
+    this.updatePlayerArray = updatePlayer => {
       this.DOM.cards.innerHTML = '';
-      this.loadCardPlayers(handler(oldPlayer, updatePlayer));
+      this.loadCardPlayers(handler(updatePlayer));
     };
   };
   bindDeletePlayerArray = handler => {

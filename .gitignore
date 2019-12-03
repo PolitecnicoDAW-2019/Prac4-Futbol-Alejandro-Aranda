@@ -61,6 +61,5 @@ typings/
 .next
 
 /.vscode
-/data/mysql/*
 /www/**
 .DS_Store
